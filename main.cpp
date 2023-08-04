@@ -80,6 +80,24 @@ class Books : public Product
         }
 };
 
+class Furniture : public Product
+{
+    private:
+        int size;
+        string color;
+
+    public:
+        Furniture(int id, const string& pname, double price, int size, const string& color)
+         : Product(id, pname, price, "Furniture"), size(size), color(color){}
+
+        void displayProductionInfo()
+        {
+            Product::displayProductionInfo();
+            std::cout << "size: " << size << '\n';
+            std::cout << "color: " << color << '\n';
+        }
+};
+
 int main()
 {
     int choice, productId, productPrice, item2, item3;
@@ -89,6 +107,7 @@ int main()
     std::cout << "1. Electronics" << '\n';
     std::cout << "2. Clothing" << '\n';
     std::cout << "3. Books" << '\n';
+    std::cout << "4. Furniture" << '\n';
     std::cout << "Enter your choice: ";
     std::cin >> choice;
 
@@ -106,12 +125,20 @@ int main()
     pointer = new Electronics(productId, productName, productPrice, item2, item3);
     }
 
-    else if(choice == 2)
+    else if(choice == 2 || choice == 4)
     {
     std::cout << "Enter product size: "; std::cin >> item2;
     std::cout << "Enter product color: "; std::cin >> item1;
 
+    if(choice == 2)
+    {
     pointer = new Clothing(productId, productName, productPrice, item2, item1);
+    }
+
+    else
+    {
+        pointer = new Furniture(productId, productName, productPrice, item2, item1);
+    }
     }
 
     else if(choice == 3)
